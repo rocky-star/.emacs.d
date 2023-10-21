@@ -67,15 +67,15 @@
   :config
   (load-theme 'sanityinc-tomorrow-day t))
 
-(defvar *my/current-theme* 'light "Current theme. dark or light.")
+(defvar *my/current-theme* 'light "Current theme.  dark or light.")
 (defun my/toggle-color ()
   "Toggle the color theme between light & dark themes."
   (interactive)
   (if (equal *my/current-theme* 'light)
       (progn (load-theme 'sanityinc-tomorrow-night t)
-	     (set *my/current-theme* 'dark))
+	     (setq *my/current-theme* 'dark))
     (progn (load-theme 'sanityinc-tomorrow-day t)
-	   (set *my/current-theme* 'light))))
+	   (setq *my/current-theme* 'light))))
 
 (use-package faces
   :if window-system
