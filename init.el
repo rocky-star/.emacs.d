@@ -268,8 +268,23 @@
   :config
   (which-key-mode))
 
-;;; Miscellaneous options
+;;; Smart Chinese input method
+(use-package pyim
+  :defer t
+  :custom
+  (default-input-method "pyim"))
 
+(use-package pyim-basedict
+  :after pyim
+  :config
+  (pyim-basedict-enable))
+
+(use-package pyim-tsinghua-dict
+  :after pyim
+  :config
+  (pyim-tsinghua-dict-enable))
+
+;;; Miscellaneous options
 (use-package saveplace
   :config
   (save-place-mode))
