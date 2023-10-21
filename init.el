@@ -67,7 +67,7 @@
 
 (use-package faces
   :custom-face
-  (default ((t (:font "Maple Mono"))))
+  (default ((t (:font "Maple Mono SC NF"))))
   (variable-pitch ((t (:font "Segoe UI")))))
 
 ;;; Completion framework
