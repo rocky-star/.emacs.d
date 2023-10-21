@@ -50,6 +50,7 @@
   (advice-add #'completing-read-multiple :filter-args #'my/crm-indicator))
 
 (use-package fringe
+  :if window-system
   :preface
   (defun my/get-scaling-factor ()
     "Return the current scaling factor on Windows."
@@ -62,10 +63,22 @@
   (fringe-mode (round (* 8 (my/get-scaling-factor)))))
 
 (use-package color-theme-sanityinc-tomorrow
+  :if window-system
   :config
   (load-theme 'sanityinc-tomorrow-day t))
 
+(defvar *my/current-theme* 'light "Current theme. dark or light.")
+(defun my/toggle-color ()
+  "Toggle the color theme between light & dark themes."
+  (interactive)
+  (if (equal *my/current-theme* 'light)
+      (progn (load-theme 'sanityinc-tomorrow-night t)
+	     (set *my/current-theme* 'dark))
+    (progn (load-theme 'sanityinc-tomorrow-day t)
+	   (set *my/current-theme* 'light))))
+
 (use-package faces
+  :if window-system
   :custom-face
   (default ((t (:font "Maple Mono NF"))))
   (variable-pitch ((t (:font "Calibri"))))
