@@ -67,8 +67,13 @@
 
 (use-package faces
   :custom-face
-  (default ((t (:font "Maple Mono SC NF"))))
-  (variable-pitch ((t (:font "Segoe UI")))))
+  (default ((t (:font "Maple Mono NF"))))
+  (variable-pitch ((t (:font "Calibri"))))
+  (fixed-pitch ((t (:font "Courier Prime"))))
+  (fixed-pitch-sans-serif ((t (:font "Courier Prime Sans"))))
+  :config
+  (dolist (charset '(kana han cjk-misc bopomofo))
+    (set-fontset-font "fontset-default" charset "Maple Mono SC NF")))
 
 ;;; Completion framework
 (use-package vertico
@@ -225,14 +230,7 @@
 	 :map corfu-map
 	      ("SPC" . corfu-insert-separator))
 
-  ;; Enable Corfu only for certain modes.
-  ;; :hook ((prog-mode . corfu-mode)
-  ;;        (shell-mode . corfu-mode)
-  ;;        (eshell-mode . corfu-mode))
-
-  ;; Recommended: Enable Corfu globally.
-  ;; This is recommended since Dabbrev can be used globally (M-/).
-  ;; See also `global-corfu-modes'.
+  ;; Enable Corfu globally.
   :config
   (global-corfu-mode))
 
