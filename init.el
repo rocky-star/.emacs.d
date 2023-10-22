@@ -385,17 +385,26 @@
 	 ("M-b" . pyim-backward-word)))
 
 (use-package pyim-cregexp-utils
+  :after pyim
+  :config
+  (pyim-isearch-mode))
+
+(use-package pyim-cregexp-utils
   :after (pyim avy orderless)
   :preface
   (defun my/avy-regex-candidates (fun regex &optional beg end pred group)
     (let ((regex (pyim-cregexp-build regex)))
       (funcall fun regex beg end pred group)))
+  :config
+  (advice-add 'avy--regex-candidates :around #'my/avy-regex-candidates))
+
+(use-package pyim-cregexp-utils
+  :after (pyim orderless)
+  :preface
   (defun my/orderless-regexp (orig-func component)
     (let ((result (funcall orig-func component)))
       (pyim-cregexp-build result)))
   :config
-  (pyim-isearch-mode)
-  (advice-add 'avy--regex-candidates :around #'my/avy-regex-candidates)
   (advice-add 'orderless-regexp :around #'my/orderless-regexp))
 
 (use-package pyim-basedict
