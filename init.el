@@ -263,6 +263,14 @@
 	 (magit-pre-refresh . diff-hl-magit-pre-refresh)
 	 (magit-post-refresh . diff-hl-magit-post-refresh)))
 
+;; C family support
+(use-package cc-mode
+  :defer t
+  :custom
+  (c-default-style '((java-mode . "java")
+		     (awk-mode . "awk")
+		     (other . "stroustrup"))))
+
 ;;; LaTeX support
 (use-package auctex
   :defer t
