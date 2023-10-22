@@ -90,6 +90,7 @@
 
 ;;; Completion framework
 (use-package vertico
+  :demand
   :config
   (vertico-mode)
   :bind (;; Bind default completion commands in the Vertico keymap
@@ -227,6 +228,7 @@
 
 ;;; Pop-up completion
 (use-package corfu
+  :demand
   ;; Optional customizations
   :custom
   ;; (corfu-cycle t) ;; Enable cycling for `corfu-next/previous'
@@ -267,7 +269,8 @@
   :custom
   (TeX-auto-save t)
   (TeX-parse-self t)
-  (TeX-master nil))
+  (TeX-master nil)
+  (japanese-TeX-engine-default 'uptex))
 
 ;;; EditorConfig support
 (use-package editorconfig
