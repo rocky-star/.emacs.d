@@ -351,6 +351,7 @@
 (use-package auctex
   :defer t
   :custom
+  (TeX-engine 'xetex)
   (TeX-auto-save t)
   (TeX-parse-self t)
   (TeX-master nil)
@@ -406,6 +407,19 @@
   :after pyim
   :config
   (pyim-tsinghua-dict-enable))
+
+;;; Snippets
+(use-package yasnippet
+  :hook ((prog-mode TeX-mode) . yas-minor-mode)
+  :config
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand))
+
+(use-package consult-yasnippet
+  :after yasnippet
+  :config
+  (define-key yas-minor-mode-map (kbd "C-c Y") #'consult-yasnippet))
 
 ;;; Configuration profiler
 (use-package esup
