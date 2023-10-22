@@ -14,12 +14,17 @@
   (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode))
 
 (use-package simple
+  :hook (prog-mode . column-number-mode)
   :custom
   ;; Hide commands in M-x which do not work in the current mode.
   ;; Vertico commands are hidden in normal buffers.
   (read-extended-command-predicate #'command-completion-default-include-p))
 
+(use-package display-line-numbers
+  :hook prog-mode)
+
 (use-package files
+  :defer t
   :custom
   (backup-directory-alist `(("." . ,temporary-file-directory))))
 
@@ -286,6 +291,10 @@
   :config
   (editorconfig-mode))
 
+;;; Jump to arbitrary positions
+(use-package avy
+  :bind ("M-g w" . avy-goto-word-1))
+
 ;;; Key suggestions
 (use-package which-key
   :delight
@@ -297,6 +306,25 @@
   :defer t
   :custom
   (default-input-method "pyim"))
+
+(use-package pyim-cstring-utils
+  :after pyim
+  :bind (("M-f" . pyim-forward-word)
+	 ("M-b" . pyim-backward-word)))
+
+(use-package pyim-cregexp-utils
+  :after (pyim avy orderless)
+  :preface
+  (defun my/avy-regex-candidates (fun regex &optional beg end pred group)
+    (let ((regex (pyim-cregexp-build regex)))
+      (funcall fun regex beg end pred group)))
+  (defun my/orderless-regexp (orig-func component)
+    (let ((result (funcall orig-func component)))
+      (pyim-cregexp-build result)))
+  :config
+  (pyim-isearch-mode)
+  (advice-add 'avy--regex-candidates :around #'my/avy-regex-candidates)
+  (advice-add 'orderless-regexp :around #'my/orderless-regexp))
 
 (use-package pyim-basedict
   :after pyim
