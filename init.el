@@ -300,6 +300,12 @@
   :config
   (pyim-tsinghua-dict-enable))
 
+;;; Configuration profiler
+(use-package esup
+  :defer t
+  :custom
+  (esup-depth 0))
+
 ;;; Miscellaneous options
 (use-package saveplace
   :config
