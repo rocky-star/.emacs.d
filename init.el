@@ -347,6 +347,15 @@
 		     (awk-mode . "awk")
 		     (other . "stroustrup"))))
 
+;; Racket support
+(use-package racket-mode
+  :preface
+  (defun my/racket-xp-setup ()
+    (add-hook 'xref-backend-functions #'racket-xp-xref-backend-function 0 t))
+  :init
+  (add-hook 'racket-mode-hook #'racket-xp-mode)
+  (add-hook 'racket-xp-mode-hook #'my/racket-xp-setup))
+
 ;;; LaTeX support
 (use-package auctex
   :defer t
