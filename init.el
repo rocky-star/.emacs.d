@@ -4,7 +4,6 @@
   (require 'use-package))
 
 (use-package package
-  :defer t
   :preface
   (defun make-repourl (repo)
     (format "https://mirrors.tuna.tsinghua.edu.cn/elpa/%s/" repo))
@@ -16,6 +15,10 @@
   (package-archive-priorities '(("gnu" . 99)
 				("nongnu" . 90)
 				("melpa-stable" . 80))))
+
+(use-package diminish
+  :ensure t
+  :pin gnu)
 
 (use-package emacs
   :custom
@@ -49,7 +52,8 @@
   (add-to-list 'default-frame-alist '(width . 132))
   (add-to-list 'default-frame-alist '(font . "Sarasa Term SC-10.5"))
 
-  (set-fringe-mode (round (* 8 (get-scaling-size))))
+  (if (display-graphic-p)
+      (set-fringe-mode (round (* 8 (get-scaling-size)))))
 
   (cond ((version< emacs-version "27") (setopt icomplete-mode t))
 	((version< emacs-version "28") (setopt fido-mode t))
@@ -98,6 +102,8 @@
 ;;;; Indication of local VCS changes
 (use-package diff-hl
   :defer t
+  :ensure t
+  :pin gnu
   :init
   (add-hook 'prog-mode-hook
 	    (if (display-graphic-p) #'diff-hl-mode #'diff-hl-margin-mode)))
@@ -113,6 +119,8 @@
 ;;;; LaTeX support
 (use-package auctex
   :defer t
+  :ensure t
+  :pin gnu
   :init
   (setopt TeX-auto-save t)
   (setopt TeX-parse-self t)
@@ -130,23 +138,31 @@
 ;;;; EditorConfig support
 (use-package editorconfig
   :diminish
+  :ensure t
+  :pin nongnu
   :custom
   ;; Enable EditorConfig
   (editorconfig-mode t))
 
 ;;;; Jump to arbitrary positions
 (use-package avy
+  :ensure t
+  :pin gnu
   :bind ("M-g w" . avy-goto-word-1))
 
 ;;;; Display available key bindings in popup
 (use-package which-key
   :defer t
+  :ensure t
+  :pin gnu
   :diminish
   :custom
   (which-key-mode t))
 
 ;;;; The Emacs guru way
 (use-package guru-mode
+  :ensure t
+  :pin melpa-stable
   :diminish guru-mode
   :hook prog-mode)
 
