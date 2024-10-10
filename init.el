@@ -3,6 +3,11 @@
 (eval-when-compile
   (require 'use-package))
 
+;; Store automatic customization options elsewhere
+(setopt custom-file (locate-user-emacs-file "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 (use-package package
   :preface
   (defun make-repourl (repo)
@@ -14,11 +19,10 @@
 		      ("melpa" . ,(make-repourl 'melpa))))
   (package-archive-priorities '(("gnu" . 99)
 				("nongnu" . 90)
-				("melpa-stable" . 80))))
-
-(use-package diminish
-  :ensure t
-  :pin gnu)
+				("melpa-stable" . 80)))
+  :config
+  (package-install-selected-packages)
+  (package-vc-install-selected-packages))
 
 (use-package emacs
   :custom
@@ -102,8 +106,6 @@
 ;;;; Indication of local VCS changes
 (use-package diff-hl
   :defer t
-  :ensure t
-  :pin gnu
   :init
   (add-hook 'prog-mode-hook
 	    (if (display-graphic-p) #'diff-hl-mode #'diff-hl-margin-mode)))
@@ -119,8 +121,6 @@
 ;;;; LaTeX support
 (use-package auctex
   :defer t
-  :ensure t
-  :pin gnu
   :init
   (setopt TeX-auto-save t)
   (setopt TeX-parse-self t)
@@ -138,31 +138,23 @@
 ;;;; EditorConfig support
 (use-package editorconfig
   :diminish
-  :ensure t
-  :pin nongnu
   :custom
   ;; Enable EditorConfig
   (editorconfig-mode t))
 
 ;;;; Jump to arbitrary positions
 (use-package avy
-  :ensure t
-  :pin gnu
   :bind ("M-g w" . avy-goto-word-1))
 
 ;;;; Display available key bindings in popup
 (use-package which-key
   :defer t
-  :ensure t
-  :pin gnu
   :diminish
   :custom
   (which-key-mode t))
 
 ;;;; The Emacs guru way
 (use-package guru-mode
-  :ensure t
-  :pin melpa-stable
   :diminish guru-mode
   :hook prog-mode)
 
@@ -176,8 +168,3 @@
 (use-package face-remap
   ;; Use variable pitch fonts in Info reader
   :hook (Info-mode . variable-pitch-mode))
-
-;; Store automatic customization options elsewhere
-(setopt custom-file (locate-user-emacs-file "custom.el"))
-(when (file-exists-p custom-file)
-  (load custom-file))
