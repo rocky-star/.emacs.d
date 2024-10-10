@@ -148,10 +148,10 @@
 
 ;;;; Display available key bindings in popup
 (use-package which-key
-  :defer t
   :diminish
-  :custom
-  (which-key-mode t))
+  :config
+  (which-key-mode)
+  )
 
 ;;;; The Emacs guru way
 (use-package guru-mode
