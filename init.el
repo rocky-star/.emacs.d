@@ -88,7 +88,14 @@
 ;;;; LSP support
 (use-package eglot
   :defer t
+  :preface
+  (defun eglot-add-to-flymake ()
+    (add-hook 'flymake-diagnostic-functions 'eglot-flymake-backend nil t))
   :config
+  ;; Keep existing Flymake backends in Eglot-enabled buffers
+  (add-to-list 'eglot-stay-out-of 'flymake)
+  (add-hook 'eglot-managed-mode-hook #'eglot-add-to-flymake)
+  
   ;; Add BasedPyright as Python LSP server
   (add-to-list 'eglot-server-programs
                '((python-mode python-ts-mode)
