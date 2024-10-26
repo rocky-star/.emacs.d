@@ -65,7 +65,7 @@
 	 (setopt completions-detailed t)
 	 (setopt fido-vertical-mode t)))
   :config
-  (if (display-graphic-p)
+  (if (>= (display-color-cells) 256)
       (load-theme 'leuven t))
   :hook (((prog-mode text-mode) . display-fill-column-indicator-mode)
 	 (prog-mode . hl-line-mode)))
