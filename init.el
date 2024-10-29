@@ -180,7 +180,13 @@
   :custom
   (default-input-method "pyim"))
 
+(use-package pyim-basedict
+  :after pyim
+  :config
+  (pyim-basedict-enable))
+
 (use-package pyim-tsinghua-dict
+  :after (pyim pyim-basedict)
   :config
   (pyim-tsinghua-dict-enable))
 
