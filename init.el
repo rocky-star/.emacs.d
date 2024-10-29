@@ -174,6 +174,26 @@
   ;; Restore window layout after closing ediff
   :hook (ediff-quit . winner-undo))
 
+;;;; Enhanced Pinyin input method
+(use-package pyim
+  :defer t
+  :custom
+  (default-input-method "pyim"))
+
+(use-package pyim-tsinghua-dict
+  :config
+  (pyim-tsinghua-dict-enable))
+
+(use-package pyim-cregexp-utils
+  :after pyim
+  :config
+  (pyim-isearch-mode 1))
+
+(use-package pyim-cstring-utils
+  :after pyim
+  :bind (([remap forward-word] . pyim-forward-word)
+	 ([remap backward-word] . pyim-backward-word)))
+
 (use-package face-remap
   ;; Use variable pitch fonts in Info reader
   :hook (Info-mode . variable-pitch-mode))
