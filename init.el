@@ -67,6 +67,8 @@
   :config
   (if (>= (display-color-cells) 256)
       (load-theme 'leuven t))
+  (if (not (display-graphic-p))
+      (xterm-mouse-mode))
   :hook (((prog-mode text-mode) . display-fill-column-indicator-mode)
 	 (prog-mode . hl-line-mode)))
 
