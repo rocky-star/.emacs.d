@@ -40,9 +40,7 @@
   (delsel-selection-mode t)
   (global-so-long-mode t)
   :custom-face
-  (fixed-pitch ((t (:family "Sarasa Fixed SC"))))
-  (fixed-pitch-serif ((t (:family "Iosevka Fixed Slab"))))
-  (variable-pitch ((t (:family "Sarasa UI SC"))))
+  (variable-pitch ((t (:family "IBM Plex Sans"))))
   :preface
   (defun get-scaling-size ()
     "Return the scaling size of the first monitor."
@@ -63,8 +61,7 @@
     (disable-theme 'leuven-dark)
     (load-theme 'leuven t))
   :init
-  (add-to-list 'default-frame-alist '(width . 132))
-  (add-to-list 'default-frame-alist '(font . "Sarasa Term SC-10.5"))
+  (add-to-list 'default-frame-alist '(font . "IBM Plex Mono-10.5"))
 
   (if (display-graphic-p)
       (set-fringe-mode (round (* 8 (get-scaling-size)))))
