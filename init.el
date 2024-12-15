@@ -52,6 +52,16 @@
 	     (dpi (string-to-number (nth 1 lines))))
         (/ dpi 96.0) ; 96 is the default DPI on Windows
 	)))
+
+  (defun enable-dark-theme ()
+    (interactive)
+    (disable-theme 'leuven)
+    (load-theme 'leuven-dark t))
+
+  (defun enable-light-theme ()
+    (interactive)
+    (disable-theme 'leuven-dark)
+    (load-theme 'leuven t))
   :init
   (add-to-list 'default-frame-alist '(width . 132))
   (add-to-list 'default-frame-alist '(font . "Sarasa Term SC-10.5"))
