@@ -127,6 +127,10 @@
                '((python-mode python-ts-mode)
 		 "basedpyright-langserver" "--stdio")))
 
+(use-package eglot-booster
+  :config
+  (eglot-booster-mode))
+
 ;;;; Inline static analysis
 (use-package flymake
   :hook prog-mode
