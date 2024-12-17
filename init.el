@@ -39,6 +39,9 @@
   (repeat-mode t)
   (delsel-selection-mode t)
   (global-so-long-mode t)
+
+  ;; Hide commands in M-x which do not apply to the current mode
+  (read-extended-command-predicate #'command-completion-default-include-p)
   :custom-face
   (variable-pitch ((t (:family "IBM Plex Sans"))))
   :preface
@@ -139,6 +142,13 @@
 	 :map flymake-mode-map
 	 ("M-n" . flymake-goto-next-error)
 	 ("M-p" . flymake-goto-prev-error)))
+
+;;;; Pop-up completion
+(use-package corfu
+  :custom
+  (corfu-auto t)
+  :config
+  (global-corfu-mode))
 
 ;;;; Indication of local VCS changes
 (use-package diff-hl
