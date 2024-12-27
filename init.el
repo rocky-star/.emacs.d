@@ -131,6 +131,7 @@
 		 "basedpyright-langserver" "--stdio")))
 
 (use-package eglot-booster
+  :if (executable-find "emacs-lsp-booster")
   :config
   (eglot-booster-mode))
 
