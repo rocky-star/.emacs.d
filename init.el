@@ -201,6 +201,11 @@
   (which-key-mode)
   )
 
+(use-package breadcrumb
+  :diminish
+  :config
+  (breadcrumb-mode))
+
 ;;;; The Emacs guru way
 (use-package guru-mode
   :diminish guru-mode
