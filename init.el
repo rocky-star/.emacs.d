@@ -56,13 +56,13 @@
 
   (defun enable-dark-theme ()
     (interactive)
-    (disable-theme 'modus-operandi-tinted)
-    (load-theme 'modus-vivendi-tinted t))
+    (disable-theme 'modus-operandi)
+    (load-theme 'modus-vivendi t))
 
   (defun enable-light-theme ()
     (interactive)
-    (disable-theme 'modus-vivendi-tinted)
-    (load-theme 'modus-operandi-tinted t))
+    (disable-theme 'modus-vivendi)
+    (load-theme 'modus-operandi t))
   :init
   (add-to-list 'default-frame-alist '(font . "IBM Plex Mono-10.5"))
 
@@ -93,7 +93,7 @@
 	  (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
   :config
   (if (>= (display-color-cells) 256)
-      (load-theme 'modus-operandi-tinted t))
+      (load-theme 'modus-operandi t))
   (if (not (display-graphic-p))
       (xterm-mouse-mode))
   :hook (((prog-mode text-mode) . display-fill-column-indicator-mode)
