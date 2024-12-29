@@ -47,12 +47,16 @@
   :preface
   (defun get-scaling-size ()
     "Return the scaling size of the first monitor."
-    (if (not (equal window-system 'w32))
-	1 ; Not supported on platforms other than Win32
-      (let* ((lines (process-lines "wmic" "DesktopMonitor" "get" "PixelsPerXLogicalInch"))
-	     (dpi (string-to-number (nth 1 lines))))
-        (/ dpi 96.0) ; 96 is the default DPI on Windows
-	)))
+    (cond ((equal window-system 'w32)
+	   (let* ((lines (process-lines "wmic" "DesktopMonitor" "get" "PixelsPerXLogicalInch"))
+		  (dpi (string-to-number (nth 1 lines))))
+             (/ dpi 96.0) ; 96 is the default DPI on Windows
+	     ))
+	  ((equal window-system 'x)
+	   (let* ((out (shell-command-to-string "xrdb -query | grep Xft.dpi | cut -f 2"))
+		  (dpi (string-to-number out)))
+	     (/ dpi 96.0)))
+	  (t 1)))
 
   (defun enable-dark-theme ()
     (interactive)
