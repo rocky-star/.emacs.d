@@ -6,14 +6,14 @@
  '(package-selected-packages
    '(auctex avy breadcrumb corfu diff-hl diminish eglot-booster
 	    fringe-scale guru-mode pyim pyim-basedict
-	    pyim-tsinghua-dict which-key))
+	    pyim-tsinghua-dict which-key yaml-mode))
  '(package-vc-selected-packages
-   '((eglot-booster :vc-backend Git :url
-		    "https://github.com/jdtsmith/eglot-booster.git")
+   '((pyim-tsinghua-dict :vc-backend Git :url
+			 "https://github.com/redguardtoo/pyim-tsinghua-dict.git")
      (fringe-scale :vc-backend Git :url
 		   "https://github.com/blahgeek/emacs-fringe-scale.git")
-     (pyim-tsinghua-dict :vc-backend Git :url
-			 "https://github.com/redguardtoo/pyim-tsinghua-dict.git"))))
+     (eglot-booster :vc-backend Git :url
+		    "https://github.com/jdtsmith/eglot-booster.git"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
