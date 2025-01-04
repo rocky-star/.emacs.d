@@ -97,7 +97,7 @@
 	  (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
   (if (equal system-type 'windows-nt)
-      (setopt ispell-alternate-dictionary (locate-user-emacs-file "words")))
+      (setopt ispell-alternate-dictionary (expand-file-name (locate-user-emacs-file "words"))))
   :config
   (if (>= (display-color-cells) 256)
       (load-theme 'modus-operandi t))
