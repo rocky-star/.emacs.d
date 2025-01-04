@@ -95,6 +95,9 @@
 	  (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
 	  (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
 	  (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+  (if (equal system-type 'windows-nt)
+      (setopt ispell-alternate-dictionary (locate-user-emacs-file "words")))
   :config
   (if (>= (display-color-cells) 256)
       (load-theme 'modus-operandi t))
